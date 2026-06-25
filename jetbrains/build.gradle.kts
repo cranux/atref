@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.atref"
-version = "0.2.0"
+version = "0.2.1"
 
 repositories {
     mavenCentral()
@@ -35,11 +35,15 @@ intellijPlatform {
         }
         changeNotes = """
             <ul>
+                <li>0.2.1 — plugin icon (white @ on indigo), version aligned with the
+                    VSCode extension. Build toolchain bumped: intellij-platform-gradle-plugin
+                    2.2.1 -> 2.5.0, Kotlin 1.9.25 -> 2.0.21; instrumentationTools() removed
+                    (deprecated and unneeded for a Kotlin-only plugin).</li>
                 <li>0.2.0 — initial public release. AtRef brings the <code>@path:line</code> copy
                     workflow to all IntelliJ-based IDEs. Feature parity with the AtRef VSCode
                     extension: @path:line, Markdown link, with-code snippet (line numbers +
                     optional context), absolute path, multi-caret, configurable path style
-                    + notification. Version aligned with the VSCode extension.</li>
+                    + notification.</li>
             </ul>
         """.trimIndent()
     }

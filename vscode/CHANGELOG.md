@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+
+- **插件图标**：白色 `@` + indigo `#4F46E5` 圆角方块。VS Code Extensions 列表 / Marketplace 缩略图都能看到
+- **运行时消息中文化**：之前 `package.nls.zh-cn.json` 只覆盖命令面板 / 菜单 / 设置；这一版把 `extension.js` 里 3 条运行时消息（无激活编辑器警告、不支持文件协议警告、"已复制" 提示）也按 VS Code 显示语言切到中文 / 英文，跟 JetBrains 版的本地化覆盖范围对齐
+- **打包优化**：`icon.svg` 源文件加入 `.vscodeignore`，不进 `.vsix`
+
 ## 0.2.0
 
 - **重命名**：插件 `name` 改为 `atref`，所有命令前缀 `copyPathWithLine.*` → `atRef.*`，所有配置前缀同样改为 `atRef.*`。⚠️ 升级后需要在 Keyboard Shortcuts 重新绑定（如果你之前用了旧的命令 ID），原有 settings.json 里的 `copyPathWithLine.*` 配置需要手动迁移成 `atRef.*`

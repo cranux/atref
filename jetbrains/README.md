@@ -48,7 +48,7 @@ To bind a shortcut: **Settings → Keymap**, search "AtRef", right-click the act
 **推荐方式（不用装 JDK / Gradle）**：用 IDEA Ultimate / Community 直接打开 `jetbrains/` 目录，IDEA 会自动识别 Gradle 项目并下载所需 JDK。然后：
 
 1. 右侧 **Gradle 工具窗** → `atref` → `Tasks` → `intellij platform` → 双击 `buildPlugin`
-2. 产物在 `jetbrains/build/distributions/atref-0.2.0.zip`
+2. 产物在 `jetbrains/build/distributions/atref-0.2.1.zip`
 3. 在任意 JetBrains IDE 里：**Settings → Plugins → ⚙ → Install Plugin from Disk…** 选上面那个 zip
 4. 重启 IDE 生效
 

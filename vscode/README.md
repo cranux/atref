@@ -67,8 +67,8 @@ code /Users/crounix/data/www/AI/atref/vscode    # 用 VS Code 打开本子目录
 ```bash
 cd vscode
 npm install
-npx vsce package          # 生成 atref-0.2.0.vsix
-code --install-extension atref-0.2.0.vsix
+npx vsce package          # 生成 atref-0.2.1.vsix
+code --install-extension atref-0.2.1.vsix
 ```
 
 ---
@@ -125,6 +125,6 @@ Then press `F5` to launch an Extension Development Host. The `.vscode/launch.jso
 ```bash
 cd vscode
 npm install
-npx vsce package          # produces atref-0.2.0.vsix
-code --install-extension atref-0.2.0.vsix
+npx vsce package          # produces atref-0.2.1.vsix
+code --install-extension atref-0.2.1.vsix
 ```
