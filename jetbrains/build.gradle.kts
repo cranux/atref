@@ -1,7 +1,7 @@
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.9.25"
-    id("org.jetbrains.intellij.platform") version "2.2.1"
+    id("org.jetbrains.kotlin.jvm") version "2.0.21"
+    id("org.jetbrains.intellij.platform") version "2.5.0"
 }
 
 group = "com.atref"
@@ -17,7 +17,9 @@ repositories {
 dependencies {
     intellijPlatform {
         intellijIdeaCommunity("2024.1.7")
-        instrumentationTools()
+        // instrumentationTools() removed: deprecated in plugin 2.5+, only needed for
+        // Java bytecode instrumentation (we're a Kotlin-only plugin without @NotNull
+        // weaving etc.). Was the leading suspect for the CI BUILD FAILED.
     }
 }
 

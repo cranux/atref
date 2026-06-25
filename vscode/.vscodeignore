@@ -3,3 +3,5 @@
 node_modules/**
 **/*.map
 README.dev.md
+icon.svg
+

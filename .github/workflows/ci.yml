@@ -54,9 +54,12 @@ jobs:
           java-version: '17'
 
       - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.10"   # pinned: setup-gradle@v4 default is "latest" (Gradle 9.x)
+                                   # which breaks intellij-platform-gradle-plugin 2.x
 
       - name: Build plugin
-        run: gradle buildPlugin --no-daemon --stacktrace
+        run: gradle buildPlugin --no-daemon --stacktrace --info
 
       - uses: actions/upload-artifact@v4
         with:

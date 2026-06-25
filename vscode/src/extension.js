@@ -6,6 +6,30 @@ function cfg() {
   return vscode.workspace.getConfiguration('atRef');
 }
 
+// Tiny runtime i18n: VSCode's package.nls.<locale>.json only covers package.json,
+// not strings inside extension.js. Three messages, no library needed.
+const MESSAGES = {
+  noEditor: {
+    en: 'AtRef: no active editor or selected file.',
+    'zh-cn': 'AtRef：当前没有激活的编辑器或选中的文件。',
+  },
+  unsupportedScheme: {
+    en: 'AtRef: unsupported file scheme "{0}" (e.g. untitled or remote without a local path).',
+    'zh-cn': 'AtRef：不支持的文件协议 "{0}"（例如未保存文件或没有本地路径的远程文件）。',
+  },
+  copied: {
+    en: 'Copied {0}',
+    'zh-cn': '已复制 {0}',
+  },
+};
+
+function t(key, ...args) {
+  const lang = (vscode.env.language || 'en').toLowerCase();
+  const useZh = lang === 'zh-cn' || lang.startsWith('zh-cn') || lang === 'zh-hans';
+  const template = (MESSAGES[key] && (useZh ? MESSAGES[key]['zh-cn'] : MESSAGES[key].en)) || key;
+  return template.replace(/\{(\d+)\}/g, (_, i) => String(args[Number(i)] ?? ''));
+}
+
 function findGitRoot(filePath) {
   let dir = path.dirname(filePath);
   // Guard against infinite loops on root.
@@ -225,18 +249,14 @@ function notify(message) {
 async function copyHandler(formatKind, resourceUri) {
   const target = resolveTargetFromArgs(resourceUri);
   if (!target) {
-    vscode.window.showWarningMessage(
-      'AtRef: no active editor or selected file.'
-    );
+    vscode.window.showWarningMessage(t('noEditor'));
     return;
   }
 
   const { uri, doc, selections } = target;
 
   if (uri.scheme !== 'file') {
-    vscode.window.showWarningMessage(
-      `AtRef: unsupported file scheme "${uri.scheme}" (e.g. untitled or remote without a local path).`
-    );
+    vscode.window.showWarningMessage(t('unsupportedScheme', uri.scheme));
     return;
   }
 
@@ -262,7 +282,7 @@ async function copyHandler(formatKind, resourceUri) {
   await vscode.env.clipboard.writeText(text);
 
   const preview = refs.length > 1 ? `${refs[0]}  (+${refs.length - 1} more)` : refs[0];
-  notify(`Copied ${preview}`);
+  notify(t('copied', preview));
 }
 
 function activate(context) {
