@@ -1,0 +1,20 @@
+{
+  "ext.displayName": "AtRef — Copy @path:line for AI",
+  "ext.description": "AtRef: copy the current file as @path:line for Claude Code / Cursor / Copilot — also Markdown links, with-code snippets (line numbers + context), absolute paths, multi-cursor.",
+  "cmd.category": "AtRef",
+  "cmd.copy.title": "Copy (default format)",
+  "cmd.copyAsAtRef.title": "Copy as @path:line",
+  "cmd.copyAsMarkdownLink.title": "Copy as Markdown Link",
+  "cmd.copyAsColon.title": "Copy as path:line",
+  "cmd.copyWithCode.title": "Copy @path:line + Code Snippet",
+  "cmd.copyAbsolutePath.title": "Copy Absolute Path with Line",
+  "menu.submenu.label": "AtRef — Copy as…",
+  "cfg.defaultFormat.desc": "Default format used by the main AtRef Copy command and the keybinding.",
+  "cfg.pathStyle.desc": "How the path part is computed: relative to workspace, relative to git root, absolute, or just the file name.",
+  "cfg.rangeSeparator.desc": "Separator between start and end lines for multi-line selections (e.g. '-' produces :45-60, ':' produces :45:60).",
+  "cfg.multiSelectionSeparator.desc": "String used to join references when the editor has multiple non-empty selections. Default is a newline.",
+  "cfg.notification.desc": "Where to show the 'Copied …' confirmation after a successful copy.",
+  "cfg.usePosixSeparators.desc": "Force forward-slash path separators in the output (recommended; matches Claude/Cursor and Markdown links).",
+  "cfg.codeBlockLineNumbers.desc": "Prefix each line in the '+ Code Snippet' code block with its original line number (recommended — lets the AI refer to a specific line unambiguously).",
+  "cfg.codeBlockContextLines.desc": "Number of surrounding lines to include before/after the selection in '+ Code Snippet'. 0 = exact selection only. The @path:start-end header still reflects the original selection."
+}

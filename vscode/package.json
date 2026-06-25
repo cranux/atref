@@ -1,0 +1,219 @@
+{
+  "name": "atref",
+  "displayName": "%ext.displayName%",
+  "description": "%ext.description%",
+  "version": "0.2.0",
+  "publisher": "local",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "atref",
+    "@path",
+    "@ref",
+    "claude",
+    "claude code",
+    "cursor",
+    "copilot",
+    "ai",
+    "reference",
+    "copy path",
+    "copy line",
+    "markdown link"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      {
+        "command": "atRef.copy",
+        "title": "%cmd.copy.title%",
+        "category": "%cmd.category%"
+      },
+      {
+        "command": "atRef.copyAsAtRef",
+        "title": "%cmd.copyAsAtRef.title%",
+        "category": "%cmd.category%"
+      },
+      {
+        "command": "atRef.copyAsMarkdownLink",
+        "title": "%cmd.copyAsMarkdownLink.title%",
+        "category": "%cmd.category%"
+      },
+      {
+        "command": "atRef.copyAsColon",
+        "title": "%cmd.copyAsColon.title%",
+        "category": "%cmd.category%"
+      },
+      {
+        "command": "atRef.copyWithCode",
+        "title": "%cmd.copyWithCode.title%",
+        "category": "%cmd.category%"
+      },
+      {
+        "command": "atRef.copyAbsolutePath",
+        "title": "%cmd.copyAbsolutePath.title%",
+        "category": "%cmd.category%"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "atRef.copy",
+        "key": "ctrl+alt+c",
+        "mac": "cmd+alt+c",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "atRef.copyAsMarkdownLink",
+        "key": "ctrl+alt+m",
+        "mac": "cmd+alt+m",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "atRef.copyWithCode",
+        "key": "ctrl+alt+shift+c",
+        "mac": "cmd+alt+shift+c",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "atRef.submenu",
+          "group": "9_cutcopypaste@10"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "atRef.copy",
+          "group": "1_copy"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "atRef.copy",
+          "group": "6_copypath"
+        }
+      ],
+      "atRef.submenu": [
+        {
+          "command": "atRef.copyAsAtRef",
+          "group": "1_format@1"
+        },
+        {
+          "command": "atRef.copyAsColon",
+          "group": "1_format@2"
+        },
+        {
+          "command": "atRef.copyAsMarkdownLink",
+          "group": "1_format@3"
+        },
+        {
+          "command": "atRef.copyAbsolutePath",
+          "group": "1_format@4"
+        },
+        {
+          "command": "atRef.copyWithCode",
+          "group": "2_extra@1"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "atRef.submenu",
+        "label": "%menu.submenu.label%"
+      }
+    ],
+    "configuration": {
+      "title": "AtRef",
+      "properties": {
+        "atRef.defaultFormat": {
+          "type": "string",
+          "enum": [
+            "at",
+            "markdown",
+            "colon",
+            "withCode",
+            "absolute"
+          ],
+          "enumDescriptions": [
+            "@path:line  (Claude Code / Cursor)",
+            "[path:line](path#L45)  (Markdown link)",
+            "path:line  (no prefix)",
+            "@path:line + fenced code block of the selected lines",
+            "/absolute/path:line"
+          ],
+          "default": "at",
+          "description": "%cfg.defaultFormat.desc%"
+        },
+        "atRef.pathStyle": {
+          "type": "string",
+          "enum": [
+            "workspace",
+            "git",
+            "absolute",
+            "basename"
+          ],
+          "enumDescriptions": [
+            "Relative to the VS Code workspace folder",
+            "Relative to the nearest .git root (falls back to workspace)",
+            "Full absolute path",
+            "Only the file name"
+          ],
+          "default": "workspace",
+          "description": "%cfg.pathStyle.desc%"
+        },
+        "atRef.rangeSeparator": {
+          "type": "string",
+          "default": "-",
+          "description": "%cfg.rangeSeparator.desc%"
+        },
+        "atRef.multiSelectionSeparator": {
+          "type": "string",
+          "default": "\n",
+          "description": "%cfg.multiSelectionSeparator.desc%"
+        },
+        "atRef.notification": {
+          "type": "string",
+          "enum": [
+            "statusBar",
+            "info",
+            "none"
+          ],
+          "default": "statusBar",
+          "description": "%cfg.notification.desc%"
+        },
+        "atRef.usePosixSeparators": {
+          "type": "boolean",
+          "default": true,
+          "description": "%cfg.usePosixSeparators.desc%"
+        },
+        "atRef.codeBlockLineNumbers": {
+          "type": "boolean",
+          "default": true,
+          "description": "%cfg.codeBlockLineNumbers.desc%"
+        },
+        "atRef.codeBlockContextLines": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "%cfg.codeBlockContextLines.desc%"
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://example.com/atref.git"
+  },
+  "scripts": {
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^2.24.0"
+  }
+}

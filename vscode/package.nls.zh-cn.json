@@ -1,0 +1,20 @@
+{
+  "ext.displayName": "AtRef · 一键复制 @path:line 喂给 AI",
+  "ext.description": "AtRef：将当前文件复制为 @path:line（Claude Code / Cursor / Copilot 引用格式），同时支持 Markdown 链接、带行号代码片段、绝对路径、多光标。",
+  "cmd.category": "AtRef",
+  "cmd.copy.title": "复制（默认格式）",
+  "cmd.copyAsAtRef.title": "复制为 @path:line",
+  "cmd.copyAsMarkdownLink.title": "复制为 Markdown 链接",
+  "cmd.copyAsColon.title": "复制为 path:line",
+  "cmd.copyWithCode.title": "复制 @path:line + 代码片段",
+  "cmd.copyAbsolutePath.title": "复制绝对路径与行号",
+  "menu.submenu.label": "AtRef · 复制为…",
+  "cfg.defaultFormat.desc": "AtRef 主命令与快捷键使用的默认格式。",
+  "cfg.pathStyle.desc": "路径的计算方式：相对工作区、相对 Git 根目录、绝对路径、或仅文件名。",
+  "cfg.rangeSeparator.desc": "多行选区的起止行号之间的分隔符（例如 '-' 输出 :45-60，':' 输出 :45:60）。",
+  "cfg.multiSelectionSeparator.desc": "存在多个非空选区时用于连接多条引用的字符串，默认为换行符。",
+  "cfg.notification.desc": "成功复制后 '已复制…' 提示的显示位置。",
+  "cfg.usePosixSeparators.desc": "在输出中强制使用正斜杠路径分隔符（推荐，与 Claude/Cursor 和 Markdown 链接保持一致）。",
+  "cfg.codeBlockLineNumbers.desc": "在 '+ 代码片段' 的代码块每行前加上原始行号（推荐，方便 AI 准确指代某一行）。",
+  "cfg.codeBlockContextLines.desc": "'+ 代码片段' 时在选区前后额外包含的上下文行数。0 = 仅选区本身。@path:起-止 头部仍然只反映原始选区，不受此项影响。"
+}

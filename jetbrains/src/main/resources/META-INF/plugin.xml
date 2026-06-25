@@ -1,0 +1,72 @@
+<idea-plugin>
+    <id>com.atref</id>
+    <name>AtRef</name>
+    <vendor email="local@example.com">local</vendor>
+
+    <description><![CDATA[
+        <p><b>AtRef</b> — copy the current file as <code>@path:line</code>, the format Claude Code / Cursor recognise.</p>
+        <p>Also provides Markdown links, with-code snippets (line numbers + optional context),
+        absolute paths, and multi-caret support. All formats are exposed as actions you can
+        bind to keyboard shortcuts in <em>Settings → Keymap</em>.</p>
+        <p>One plugin works in IDEA, PyCharm, WebStorm, GoLand, and other IntelliJ-based IDEs.
+        A companion VSCode extension lives alongside in the same repo.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <resource-bundle>messages.AtRefBundle</resource-bundle>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.atref.AtRefSettings"/>
+        <applicationConfigurable
+            parentId="tools"
+            instance="com.atref.AtRefSettingsConfigurable"
+            id="com.atref.settings"
+            key="settings.title"
+            bundle="messages.AtRefBundle"/>
+        <notificationGroup id="AtRef" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <!-- Default copy action — uses the configured defaultFormat -->
+        <action id="AtRef.Copy"
+                class="com.atref.CopyDefaultAction"
+                icon="AllIcons.Actions.Copy"
+                text="AtRef: Copy (Default Format)"
+                description="Copy the current file reference using the configured AtRef default format."/>
+
+        <!-- Submenu grouping all explicit formats -->
+        <group id="AtRef.Submenu"
+               class="com.intellij.openapi.actionSystem.DefaultActionGroup"
+               text="AtRef — Copy as…"
+               popup="true"
+               icon="AllIcons.Actions.Copy">
+
+            <action id="AtRef.CopyAtRef"
+                    class="com.atref.CopyAtRefAction"
+                    text="@path:line"/>
+
+            <action id="AtRef.CopyColon"
+                    class="com.atref.CopyColonAction"
+                    text="path:line"/>
+
+            <action id="AtRef.CopyMarkdownLink"
+                    class="com.atref.CopyMarkdownLinkAction"
+                    text="Markdown Link"/>
+
+            <action id="AtRef.CopyAbsolutePath"
+                    class="com.atref.CopyAbsolutePathAction"
+                    text="Absolute Path with Line"/>
+
+            <separator/>
+
+            <action id="AtRef.CopyWithCode"
+                    class="com.atref.CopyWithCodeAction"
+                    text="@path:line + Code Snippet"/>
+
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorTabPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </group>
+    </actions>
+</idea-plugin>
