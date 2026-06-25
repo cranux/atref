@@ -1,8 +1,14 @@
 # AtRef
 
+[![CI](https://github.com/cranux/atref/actions/workflows/ci.yml/badge.svg)](https://github.com/cranux/atref/actions/workflows/ci.yml)
+[![Release](https://github.com/cranux/atref/actions/workflows/release.yml/badge.svg)](https://github.com/cranux/atref/actions/workflows/release.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+
 一键把当前文件复制为 `@<路径>:<行号>` —— Claude Code / Cursor / Copilot 都认识的引用格式。也支持 Markdown 链接、带行号代码片段、绝对路径、多光标。
 
 One keystroke to copy the current file as `@<path>:<line>` — the reference format Claude Code / Cursor / Copilot recognise. Also Markdown links, with-code snippets, absolute paths, multi-cursor.
+
+**下载预编译产物 / Download prebuilt binaries**：[GitHub Releases](https://github.com/cranux/atref/releases)
 
 ## 两个独立实现 / Two parallel implementations
 
@@ -65,6 +71,30 @@ atref/  (this repo)
 - JetBrains plugin ID：`com.atref`
 - JetBrains action ID 前缀：`AtRef.*`（如 `AtRef.Copy` / `AtRef.CopyWithCode`）
 - Kotlin 包：`com.atref`
+
+## 发布流程 / Releasing
+
+CI 在每次 `push` 到 `main` 或开 PR 时跑，并行打包两边、把产物上传到 workflow run（保留 14 天，可在 GitHub Actions 页下载试装）。
+
+正式发布走 tag：
+
+```bash
+# 1) 把 vscode/package.json 和 jetbrains/build.gradle.kts 的 version 同步到目标版本
+# 2) commit + push 这两个版本号改动
+# 3) 打 tag 并 push
+git tag v0.3.0
+git push origin v0.3.0
+```
+
+`Release` workflow 看到 `v*` tag 就会：
+
+1. 并行跑 `vsce package`（产出 `atref-0.3.0.vsix`）和 `gradle buildPlugin`（产出 `atref-0.3.0.zip`）
+2. 把两个产物都挂到一个新的 GitHub Release（标题 = tag 名）
+3. release notes 自动从上一次 tag 至今的 commit 生成
+
+CI runs on every push to `main` and on PRs, building both implementations in parallel and uploading the artifacts to the workflow run (kept for 14 days; downloadable from the Actions tab for sanity-installs).
+
+Production releases are tag-triggered. Bump versions in `vscode/package.json` and `jetbrains/build.gradle.kts`, commit, then `git tag v0.3.0 && git push origin v0.3.0`. The `Release` workflow packages both, attaches the `.vsix` + `.zip` to a new GitHub Release, and auto-generates notes from the commit log.
 
 ## License
 

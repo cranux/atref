@@ -208,8 +208,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://example.com/atref.git"
+    "url": "https://github.com/cranux/atref.git"
   },
+  "bugs": {
+    "url": "https://github.com/cranux/atref/issues"
+  },
+  "homepage": "https://github.com/cranux/atref#readme",
   "scripts": {
     "package": "vsce package"
   },
