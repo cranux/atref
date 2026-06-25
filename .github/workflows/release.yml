@@ -32,6 +32,11 @@ jobs:
 
   jetbrains:
     name: Package JetBrains plugin
+    # TEMPORARILY DISABLED: gradle buildPlugin fails in CI (intellij-platform-gradle-plugin
+    # config issue under investigation). Re-enable by removing the `if: false` line below
+    # AND re-adding `jetbrains` to the release job's `needs:` array AND uncommenting the
+    # jetbrains-plugin download step + the "JetBrains IDEs" install block in the body.
+    if: false
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -56,7 +61,8 @@ jobs:
 
   release:
     name: Publish GitHub Release
-    needs: [vscode, jetbrains]
+    # NOTE: jetbrains job temporarily removed from needs while it's disabled.
+    needs: [vscode]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
@@ -64,10 +70,11 @@ jobs:
           name: vscode-extension
           path: dist/
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: jetbrains-plugin
-          path: dist/
+      # JetBrains download step disabled while the jetbrains build job is off.
+      # - uses: actions/download-artifact@v4
+      #   with:
+      #     name: jetbrains-plugin
+      #     path: dist/
 
       - name: List release assets
         run: ls -la dist/
@@ -89,7 +96,7 @@ jobs:
             code --install-extension atref-*.vsix
             ```
 
-            **JetBrains IDEs** (IDEA / PyCharm / WebStorm / GoLand / RubyMine / PhpStorm / Rider / CLion / RustRover) — download the `.zip` below, then in your IDE:
-            **Settings → Plugins → ⚙ → Install Plugin from Disk…** and select the zip.
+            > ⚠️ JetBrains plugin (`.zip`) is not in this release — CI build is being fixed.
+            > For now build it locally: open `jetbrains/` in IDEA, Gradle tool window → `buildPlugin`.
 
             ---

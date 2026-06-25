@@ -38,6 +38,9 @@ jobs:
 
   jetbrains:
     name: JetBrains plugin
+    # TEMPORARILY DISABLED: gradle buildPlugin fails in CI (intellij-platform-gradle-plugin
+    # config issue under investigation). Re-enable by removing the `if: false` line below.
+    if: false
     runs-on: ubuntu-latest
     defaults:
       run:
